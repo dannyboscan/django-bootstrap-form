@@ -7,6 +7,7 @@ from bootstrapform import config
 
 register = template.Library()
 
+
 @register.filter
 def bootstrap(element):
     markup_classes = {'label': '', 'value': '', 'single_value': ''}
@@ -45,6 +46,7 @@ def bootstrap_horizontal(element, label_cols='col-sm-2 col-lg-2'):
 
     return render(element, markup_classes)
 
+
 @register.filter
 def add_input_classes(field):
     if not is_checkbox(field) and not is_multiple_checkbox(field) \
@@ -77,8 +79,8 @@ def render(element, markup_classes):
             template = get_template("bootstrapform/form.html")
             context = Context({'form': element, 'classes': markup_classes})
 
-        if django_version >= (1, 8):
-            context = context.flatten()
+    if django_version >= (1, 8):
+        context = context.flatten()
 
     return template.render(context)
 
